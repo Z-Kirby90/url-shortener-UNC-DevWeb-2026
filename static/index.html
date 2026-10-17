@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réducteur d'URL</title>
+  <link rel="stylesheet" href="output_style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>The Link</h1>
+    <p id="underH1"><strong>✨ votre réducteur d'URL ✨</strong></p>
+    <p id="madein">Made-in Calédonie et conforme RGPD <img id="RGPD_Logo" src="RGPD_Logo.png"></p>
+    <img class="linkImg" src="link-solid-full.svg">
+    <img class="linkImg" src="link-solid-full.svg">
+    <img class="linkImg" src="link-solid-full.svg">
+    <img class="linkImg" src="link-solid-full.svg">
+    
+
+    <p id="desc">Obtenez un lien gratuitement et de manière sécurisée ⛓️<br>Notre solution vous permet de raccourcir vos URL sans aucun frais ! ♥️</p>
+
+    <div id="error" class="error"></div>
+    <div id="result" class="result">
+      <p>Lien créé : <a id="short-link" href="#" target="_blank" rel="noopener"><code id="short-code"></code></a></p>
+      <button id="copy-btn" type="button">Copier l'URL</button>
+    </div>
+
+    <form method="post" action="/api-v2/" id="submit-link">
+      <label for="url">Ecrivez votre URL à réduire</label>
+      <input name="url" id="url" type="url" placeholder="https://jhon.doe.com" required />
+      <button type="submit" id="submitBtn">Envoyer</button>
+    </form>
+
+    <div id="secondPart">
+      <code id="link_create_feedback">
+        <p class="MSG_feedback">Une personne vient de créer un lien ! 🙋</p>
+      </code>
+      
+      <form id="feedbackForm">
+        <h4>Partagez votre avis ! 🥰</h4>
+        <label for="feedbackForm-name">Votre nom :</label>
+        <input id="feedbackForm-name" name="feedbackForm-name" type="text" maxlength="5">
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <div id="footerAdresse">
+      <label for="contact-us">Adresse de contact :</label>
+      <p name="contact-us" id="contact-us"><a href="mailto:chatel.martin55@gmail.com">chatel.martin55@gmail.com</a></p>
+    </div>
+    <div id="LegalMentions">
+      <p class="legal">Termes & Services</p>
+      <p class="legal">Conditions D'utilisations</p>
+      <p class="legal">Politique De Confidentialité</p>
+    </div>
+  </footer>
+</body>
+</html>

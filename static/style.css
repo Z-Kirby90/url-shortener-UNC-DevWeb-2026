@@ -1,0 +1,262 @@
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --ink: #14213d;
+  --ink-soft: #3d4a66;
+  --accent: #0b6e8f;
+  --accent-dark: #084f67;
+  --card: rgba(255, 255, 255, 0.85);
+  --band: #2b3a55;
+  --footer: #1a2236;
+  --radius: 15px;
+}
+
+html { min-height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  line-height: 1.5;
+  background: linear-gradient(rgb(255, 253, 130), rgb(150, 255, 255) 35%);
+  background-color: rgb(150, 255, 255);
+  background-attachment: fixed;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2.5rem;
+}
+
+/* Contenu centré, largeur max 40rem, marges latérales sur mobile */
+main > h1,
+main > #desc,
+main > .error,
+main > .result,
+main > #submit-link {
+  width: min(100% - 2rem, 40rem);
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  text-align: center;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  letter-spacing: -0.02em;
+}
+
+#desc {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* ---------- Messages ---------- */
+.error {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: #fde8e8;
+  border: 1px solid #e5484d;
+  color: #8a1c1c;
+  text-align: center;
+}
+.error:empty { display: none; }   /* caché tant qu'il n'y a pas de message */
+
+.result {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #e6f9ec;
+  border: 1px solid #2f9e5b;
+  text-align: center;
+}
+/* caché tant qu'aucun lien n'a été créé */
+.result:has(#short-code:empty) { display: none; }
+.result p { margin: 0 0 0.75rem; word-break: break-all; }
+.result a { color: var(--accent-dark); font-weight: 600; }
+
+/* ---------- Formulaire principal ---------- */
+#submit-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  text-align: center;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+#submit-link:hover,
+#submit-link:focus-within {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+#submit-link button { align-self: center; }
+
+label { font-weight: 600; }
+
+input {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #9aa5b8;
+  border-radius: 8px;
+}
+input::placeholder { color: #7b869a; }
+
+button {
+  padding: 0.6rem 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+button:hover { background: var(--accent-dark); }
+
+:focus-visible {
+  outline: 3px solid #14213d;
+  outline-offset: 2px;
+}
+
+/* ---------- Bande « retours » ---------- */
+#secondPart {
+  width: 100%;
+  margin-top: 2.5rem;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--band);
+  color: #fff;
+}
+
+#link_create_feedback {
+    height : 355px;
+  position: relative;
+  overflow: hidden;            /* masque ce qui dépasse */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;   /* les messages s'empilent depuis le bas */
+  min-height: 2rem;
+  font-family: inherit;        /* neutralise la police monospace de <code> */
+  background: transparent;
+}
+
+.MSG_feedback {
+  margin: 0.25em 0;
+  text-align: center;
+  animation: slide-in 0.5s ease-out;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Classe pour la sortie (ajoutée par le JS) */
+.MSG_feedback.leaving {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+#feedbackForm {
+  width: min(100%, 40rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+}
+#feedbackForm h4 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+#feedbackForm label { margin-top: 0.5rem; }
+
+/* ---------- Pied de page ---------- */
+footer {
+    display : flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  background: var(--footer);
+  color: #fff;
+}
+footer p { margin: 0.25rem 0 0; }
+footer a { color: rgb(150, 255, 255); }
+
+/* ---------- Accessibilité ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+#underH1 {
+    font-size : 22px;
+    color: var(--ink-soft);
+}
+
+#RGPD_Logo {
+    height : 45px;
+    width : 45px;
+    margin-bottom : -15px;
+}
+
+.linkImg {
+    position : absolute;
+    width : 50px;
+    height : 50px;
+    &:nth-child(4) {
+        right : 50px;
+        top : 100px;
+    }
+    &:nth-child(5) {
+        right : 50px;
+        top : 200px;
+    }
+    &:nth-child(6) {
+        left : 50px;
+        top : 100px;
+    }
+    &:nth-child(7) {
+        left : 50px;
+        top : 200px;
+    }
+}
+
+#LegalMentions {
+    justify-content: center;
+    align-self: center;
+    gap: 1.5rem
+}
+
+.legal {
+    color : rgb(150,150,255);
+    text-decoration : underline;
+}
+
+#footerAdresse {
+    position : absolute;
+    left : 20px;
+}
